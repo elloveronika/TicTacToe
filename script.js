@@ -12,7 +12,7 @@ document.querySelector(".box").addEventListener("click", boxSelect);
 // here we are adding an event listener to identify a click on a box
 
 function boxSelect() {
-  // this loop will identify which box was selected by grabbing my array whoch now holds box numbers
+  // this loop will identify which box was selected by grabbing my array which now holds box numbers
   for (let i = 0; i < myArr.length; i++) {
     document.getElementById(myArr[i]).addEventListener("click", function () {
       playerChoice(), console.log(botChoice(playerChoice()));
@@ -22,13 +22,15 @@ function boxSelect() {
 }
 
 function playerChoice() {
+  let select = document.querySelector(".box");
   let playerSelect = document.querySelector("select").value;
-  document.querySelector(".box").innerText = playerSelect;
-  //   if (playerSelect == "O") {
-  //     this.innerText = "O";
-  //   } else {
-  //     this.innerText = "X";
-  //   }
+  select.innerText = playerSelect;
+  //   select.addEventListener("click");
+  if (playerSelect == "O") {
+    this.innerText = "O";
+  } else {
+    this.innerText = "X";
+  }
   return playerSelect;
   // await botChoice(playerChoice())
   //maybe somehow call  botchoice  inside this function
