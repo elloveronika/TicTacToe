@@ -8,21 +8,24 @@ for (let i = 0; i < boxSections.length; i++) {
   //we are pushing all the box ids into the empty array
 }
 // console.log(myArr)
-document.querySelector(".table").addEventListener("click", boxSelect);
+// document.querySelectorAll(".box").addEventListener("click", boxSelect);
 // here we are adding an event listener to identify a click on a box
 //only first box is being selected,, how do i select all
 
 function boxSelect() {
   // this loop will identify which box was selected by grabbing my array which now holds box numbers
   for (let i = 0; i < myArr.length; i++) {
+    console.log(i);
     document.getElementById(myArr[i]).addEventListener("click", function () {
       playerChoice(myArr[i]);
       botChoice(playerChoice(myArr[i]));
-      botPlacement(botChoice(playerChoice(myArr[i])));
+      botPlacement(botChoice(playerChoice(myArr[i])), i);
     });
     //this is test
   }
 }
+boxSelect();
+//called on boxSelect only because it is waiting on an even listener to do anything
 
 function playerChoice(choice) {
   let select = document.getElementById(choice);
@@ -48,21 +51,25 @@ function botChoice(playerLetter) {
     botLetter = "O";
   }
 
-  console.log(botLetter);
+  //   console.log(botLetter);
   return botLetter;
 }
-function botPlacement(placement) {
+function botPlacement(botLetter, playerPlacement) {
+  let random = Math.floor(Math.random() * myArr.length);
+  //   console.log(`hi player ${playerPlacement}`);
   for (let i = 0; i < myArr.length; i++) {
     let value = document.getElementById(myArr[i]).innerText;
     //   console.log(`this is inside for loop: ${myArr[i]}`);
-    if (value == "") {
+    // console.log(`hi bot ${myArr[i]}`);
+    if (value == "" && playerPlacement !== i && random !== i) {
       //   let random = Math.random();
       //out of the 8 boxes available here how do i get a random box
       //using math random to give me a number out of the boxes without a value,
-      document.getElementById(myArr[i]).innerText = placement;
+      document.getElementById(myArr[random]).innerText = botLetter;
+      console.log(`this is inside if  statement ${i} &${playerPlacement} `);
     }
   }
-  console.log(`this is inside botPlacement ${placement}`);
+  //   console.log(`this is inside botPlacement ${botLetter}`);
 }
 
 //create or add logic that will identify boxes without value to then fill it in with value of bot choice.. maybe with math.random we select a random box without a value
