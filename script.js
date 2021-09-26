@@ -58,21 +58,35 @@ function botPlacement(botLetter, playerPlacement) {
   //   console.log(`hi player ${playerPlacement}`);
   let random = Math.floor(Math.random() * myArr.length);
   let randomValue = document.getElementById(myArr[random]).innerText;
-  // console.log(random);
-  while (randomValue !== "") {
-    console.log(random);
-    random = Math.floor(Math.random() * myArr.length);
-    randomValue = document.getElementById(myArr[random]).innerText;
-    // return randomValue;
 
-    // random++
+  let theMappedArrayOfIds = myArr.map((id) => {
+    let theDom = document.getElementById(id);
+    let theInnerText = theDom.innerText;
+    return theInnerText;
+    // console.log(Boolean(theInnerText));
+  });
+  let newMaapedIds = theMappedArrayOfIds.filter((x) => !Boolean(x));
+  console.log(newMaapedIds);
+  // console.log(random);
+  //how to create a condtional that can check if random value has only one box left OR
+  if (newMaapedIds.length > 1) {
+    while (randomValue !== "") {
+      console.log(random);
+      random = Math.floor(Math.random() * myArr.length);
+      randomValue = document.getElementById(myArr[random]).innerText;
+      // return randomValue;
+
+      // random++
+    }
   }
+
+  //create a function that will identify empty string
+  //using the boolean object method???
   console.log(
     `this is random ${random} and this is randomValue ${randomValue}`
   );
   document.getElementById(myArr[random]).innerText = botLetter;
   // let value = document.getElementById(myArr[i]).innerText;
-
   // for (let i = 0; i < myArr.length; i++) {
   // while()
 
