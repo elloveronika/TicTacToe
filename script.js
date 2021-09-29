@@ -19,10 +19,11 @@ function boxSelect() {
     document
       .getElementById(myArrOfIBoxIds[i])
       .addEventListener("click", function () {
-        playerChoice(myArrOfIBoxIds[i]);
-        botChoice(playerChoice(myArrOfIBoxIds[i]));
-        botPlacement(botChoice(playerChoice(myArrOfIBoxIds[i])));
-        checkWin(botChoice(playerChoice(myArrOfIBoxIds[i])));
+        const playerTeamXorO = playerChoice(myArrOfIBoxIds[i]);
+        // checkWin(playerTeamXorO);
+
+        botPlacement(botChoice(playerTeamXorO));
+        // checkWin(botChoice(playerChoice(myArrOfIBoxIds[i])));
       });
     //this is test
   }
@@ -30,19 +31,11 @@ function boxSelect() {
 boxSelect();
 //called on boxSelect only because it is waiting on an even listener to do anything
 
-function playerChoice(choice) {
-  let select = document.getElementById(choice);
-  let playerSelect = document.querySelector("select").value;
-  select.innerText = playerSelect;
-  //   select.addEventListener("click");
-  //   if (playerSelect == "O") {
-  //     this.innerText = "O";
-  //   } else {
-  //     this.innerText = "X";
-  //   }
-  return playerSelect;
-  // await botChoice(playerChoice())
-  //maybe somehow call  botchoice  inside this function
+function playerChoice(id) {
+  let select = document.getElementById(id);
+  let playerTeamXorO = document.querySelector("select").value;
+  select.innerText = playerTeamXorO;
+  return playerTeamXorO;
 }
 
 function botChoice(playerLetter) {
@@ -57,87 +50,36 @@ function botChoice(playerLetter) {
   //   console.log(botLetter);
   return botLetter;
 }
-let theArrayWithtable;
+
+//here we are returning the innerText of a box element with the provided id
+function getInnerTextById(id) {
+  let domElement = document.getElementById(id);
+  let innerTextOfElement = domElement.innerText;
+  return innerTextOfElement;
+}
 
 function botPlacement(botLetter) {
-  //   console.log(`hi player ${playerPlacement}`);
-  let random = Math.floor(Math.random() * myArrOfIBoxIds.length);
-  let randomValue = document.getElementById(myArrOfIBoxIds[random]).innerText;
-  //creating an array with the inner texts
-  let theMappedArrayOfIds = myArrOfIBoxIds.map((id) => {
-    let theDom = document.getElementById(id);
-    let theInnerText = theDom.innerText;
-    return theInnerText;
-    // console.log(Boolean(theInnerText));
-  });
-  //creating a new array with empty spaces available
-  let newMaapedIds = theMappedArrayOfIds.filter((x) => !Boolean(x));
-  console.log(newMaapedIds);
+  //creating a new array with the ids of squares with empty spaces
+  let idsOfEmptySquares = myArrOfIBoxIds.filter(
+    (id) => !Boolean(getInnerTextById(id))
+  );
+  console.log(idsOfEmptySquares);
 
-  // console.log(random);
   //how to create a condtional that can check if random value has only one box left OR
-  if (newMaapedIds.length > 1) {
-    while (randomValue !== "") {
-      console.log(random);
-      random = Math.floor(Math.random() * myArrOfIBoxIds.length);
-      randomValue = document.getElementById(myArrOfIBoxIds[random]).innerText;
-      // return randomValue;
-
-      // random++
-    }
+  if (idsOfEmptySquares.length > 0) {
+    const random = Math.floor(Math.random() * idsOfEmptySquares.length);
+    const botSelectedSquareId = idsOfEmptySquares[random];
+    document.getElementById(botSelectedSquareId).innerText = botLetter;
   }
-
-  //create a function that will identify empty string
-  //using the boolean object method???
-  // console.log(
-  //   `this is random ${random} and this is randomValue ${randomValue}`
-  // );
-  document.getElementById(myArrOfIBoxIds[random]).innerText = botLetter;
-  // let value = document.getElementById(myArrOfIBoxIds[i]).innerText;
-  // for (let i = 0; i < myArrOfIBoxIds.length; i++) {
-  // while()
-
-  //
-  //   console.log(`this is inside for loop: ${myArrOfIBoxIds[i]}`);
-  // console.log(`hi bot ${myArrOfIBoxIds[i]}`);
-  // while (randomValue !== "") {
-  //   console.log(`this is inside while loop ${random++}`);
-  // console.log(`this is random ${random()}`);
-  // while (randomValue !== "") {
-  //
-  //   random++;
-  // }
-
-  //   if (value == "" && randomValue == "" && myArrOfIBoxIds[random] !== myArrOfIBoxIds[i]) {
-  //     //   let random = Math.random();
-  //     //out of the 8 boxes available here how do i get a random box
-  //     //using math random to give me a number out of the boxes without a value,
-  //     document.getElementById(myArrOfIBoxIds[random]).innerText = botLetter;
-  //     console.log(`this is inside if  statement ${i} & ${playerPlacement} `);
-  //   }
-  // }
-  //returning the value of array to pass it onto the check win function
-
-  // return theMappedArrayOfIds;
-  console.log(theMappedArrayOfIds);
-  //   console.log(`this is inside botPlacement ${botLetter}`);
-
-  // theArrayWithtable = function arrayReturningTable() {
-  //   console.log(theMappedArrayOfIds);
-  //   return theMappedArrayOfIds;
-  // };
-  // theArrayWithtable = arrayReturningTable();
 }
 
 //create or add logic that will identify boxes without value to then fill it in with value of bot choice.. maybe with math.random we select a random box without a value
 
-function checkWin(calledArray) {
-  // if()
-  // console.log(calledArray);
-  // console.log(`this is inside : ${calledArray}`);
-  //create a function that will start keep track for placement of each value in order to have a winner.. if statement to check for all possible winning outcomes
-  //
-} //
+function checkWin(teamXorO) {
+  //how can we check the win conditions against my squares' inner texts
+  // my win conditions will be in a two dimensional array
+  // what is a two dimensional array? nested arrays
+}
 
 //add logic that will use setTimeout to play against playchoice , this will be used on botchoice
 // how can we get an array of table that is being updaed each time so that we can check to see if we have a winning condition
