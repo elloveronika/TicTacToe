@@ -1,5 +1,6 @@
 //creating an empty array to later store the list of boxes
-let playerScore = 0;
+let playerScore = 1;
+let botScore = 1;
 let myArrOfIBoxIds = [];
 //here we are grabbing the container for all the boxes
 let boxSections = document.querySelectorAll(".table section");
@@ -12,27 +13,46 @@ for (let i = 0; i < boxSections.length; i++) {
 
 // this loop will identify which box was selected by grabbing my array which now holds box numbers
 let didWin = false;
-
+//whwen we are trying to decalre a boolean or state a different boolean value when want to start with a false point to then make it true
 for (let i = 0; i < myArrOfIBoxIds.length; i++) {
   // console.log(i);
+  //each
   document
     .getElementById(myArrOfIBoxIds[i])
     .addEventListener("click", function () {
       if (didWin) {
         return;
       }
+      console.log("inside event listener, value of didWin: ", didWin);
       const playerTeamXorO = playerChoice(myArrOfIBoxIds[i]);
-      // botPlacement(botChoice(playerTeamXorO));
 
+      console.log(
+        `This is right outside the if else statement player team x or o value: ${playerTeamXorO}`
+      );
+
+      //this is reassigning a boolean based on player value
       didWin = checkWin(playerTeamXorO);
+
       if (didWin) {
+        console.log(`this is playerScore ${playerScore++}`);
         return;
       }
-      // console.log(`this is inside the event listener function ${didWin}`);
 
+      // botPlacement(botChoice(playerTeamXorO));
+
+      //this is returning a boolean based on bot value which is dependant on plare choice
       didWin = checkWin(botPlacement(botChoice(playerTeamXorO)));
-      console.log("inside event listener, value of didWin: ", didWin);
+
+      if (didWin) {
+        console.log(`this is possibly the bot point ${botScore++}`);
+        return;
+      }
+
+      // console.log(`this is inside the event listener function ${didWin}`);
     });
+  document.getElementsByClassName("botScore").innerText = botScore;
+
+  document.getElementsByClassName("playerScore").innerText = playerScore;
 }
 //with each if condition , one checking for player win and the other for bot win with the boolean value coming didWin, when the if statement runs we are going to stop the event listener somehow , maybe with a return maybe with a break
 //main things i have to handle are the botchoice win and player
@@ -41,9 +61,9 @@ for (let i = 0; i < myArrOfIBoxIds.length; i++) {
 //called on boxSelect only because it is waiting on an even listener to do anything
 
 function playerChoice(id) {
-  let select = document.getElementById(id);
+  let selectedSquare = document.getElementById(id);
   let playerTeamXorO = document.querySelector("select").value;
-  select.innerText = playerTeamXorO;
+  selectedSquare.innerText = playerTeamXorO;
   return playerTeamXorO;
 }
 
@@ -101,12 +121,14 @@ function checkWin(teamXorO) {
     [2, 4, 6],
   ];
 
-  let isWinner = winConditionsArr.some((winCondition) =>
-    winCondition.every((id) => {
-      let isPlayerSquare = getInnerTextById(`box${id}`) == teamXorO;
-      console.log(getInnerTextById(`box${id}`), teamXorO, isPlayerSquare);
-      return isPlayerSquare;
-    })
+  let isWinner = winConditionsArr.some(
+    (winCondition) =>
+      winCondition.every((id) => {
+        let isPlayerSquare = getInnerTextById(`box${id}`) == teamXorO;
+        console.log(getInnerTextById(`box${id}`), teamXorO, isPlayerSquare);
+        return isPlayerSquare;
+      })
+    //checkWinner is returning a boolean
   );
   console.log("inside checkWinner, isWinner: ", isWinner);
   return isWinner;

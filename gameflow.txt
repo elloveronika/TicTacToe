@@ -1,0 +1,9 @@
+v: 
+player chooses value of x or o 
+player clicks on a box in gameboard
+check
+the empty square now becomes player value
+check
+bot chooses a random empty square to fill in with its value
+check
+
