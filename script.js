@@ -1,4 +1,5 @@
 //creating an empty array to later store the list of boxes
+
 let playerScore = 1;
 let botScore = 1;
 let myArrOfIBoxIds = [];
@@ -9,7 +10,6 @@ for (let i = 0; i < boxSections.length; i++) {
   myArrOfIBoxIds.push(boxSections[i].id);
   //we are pushing all the box ids into the empty array
 } // here we are adding an event listener to identify a click on a box
-//only first box is being selected,, how do i select all
 
 // this loop will identify which box was selected by grabbing my array which now holds box numbers
 let didWin = false;
@@ -50,10 +50,10 @@ for (let i = 0; i < myArrOfIBoxIds.length; i++) {
 
       // console.log(`this is inside the event listener function ${didWin}`);
     });
-  document.getElementsByClassName("botScore").innerText = botScore;
-
-  document.getElementsByClassName("playerScore").innerText = playerScore;
 }
+document.getElementsByClassName("botScore").innerText = botScore;
+
+document.getElementsByClassName("playerScore").innerText = playerScore;
 //with each if condition , one checking for player win and the other for bot win with the boolean value coming didWin, when the if statement runs we are going to stop the event listener somehow , maybe with a return maybe with a break
 //main things i have to handle are the botchoice win and player
 //
@@ -82,7 +82,19 @@ function botChoice(playerLetter) {
 //here we are returning the innerText of a box element with the provided id
 function getInnerTextById(id) {
   let domElement = document.getElementById(id);
+  console.log(`this is the id that is inside getinnertext: ${id}`);
   let innerTextOfElement = domElement.innerText;
+  console.log(
+    `this is the innerText that is inside getinnertext: ${innerTextOfElement}`
+  );
+  document.querySelector(".restart").addEventListener("click", restart);
+
+  function restart() {
+    domElement.innerText = "";
+    console.log(`restart has been triggered`);
+    didWin = true;
+  }
+
   return innerTextOfElement;
 }
 
@@ -125,7 +137,7 @@ function checkWin(teamXorO) {
     (winCondition) =>
       winCondition.every((id) => {
         let isPlayerSquare = getInnerTextById(`box${id}`) == teamXorO;
-        console.log(getInnerTextById(`box${id}`), teamXorO, isPlayerSquare);
+        // console.log(getInnerTextById(`box${id}`), teamXorO, isPlayerSquare);
         return isPlayerSquare;
       })
     //checkWinner is returning a boolean

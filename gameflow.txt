@@ -6,4 +6,23 @@ the empty square now becomes player value
 check
 bot chooses a random empty square to fill in with its value
 check
+we get a winner
+update point 
+
+questions:
+how do we identify when we get a winner to that we can alow for restart button to go off
+technically we dont need a winning condtion so that we restart the game
+how do we clear the gameboard but not the total points
+how to i wipe all the values from the boxes 
+
+things i have left to optimize :
+page reloads after hitting reload button 
+table gets cleared
+points remain
+when player hits start over it will then clear the entire board along with points
+whent there is no winner and table is full stop the game also 
+make it so the player does not override the bot value 
+
+
+
 
