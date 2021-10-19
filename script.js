@@ -34,7 +34,9 @@ function startGame() {
         didWin = checkWin(playerTeamXorO);
 
         if (didWin) {
-          console.log(`this is playerScore ${playerScore++}`);
+          // console.log(`this is playerScore ${playerScore++}`);
+
+          document.querySelector(".playerScore").innerText = playerScore++;
           return;
         }
 
@@ -44,20 +46,20 @@ function startGame() {
         didWin = checkWin(botPlacement(botChoice(playerTeamXorO)));
 
         if (didWin) {
-          console.log(`this is possibly the bot point ${botScore++}`);
+          // console.log(`this is possibly the bot point ${botScore++}`);
+          document.querySelector(".botScore").innerText = botScore++;
           return;
         }
 
         // console.log(`this is inside the event listener function ${didWin}`);
       });
   }
-  document.getElementsByClassName("botScore").innerText = botScore;
 
-  document.getElementsByClassName("playerScore").innerText = playerScore;
   //with each if condition , one checking for player win and the other for bot win with the boolean value coming didWin, when the if statement runs we are going to stop the event listener somehow , maybe with a return maybe with a break
   //main things i have to handle are the botchoice win and player
   //
 }
+
 startGame();
 //called on boxSelect only because it is waiting on an even listener to do anything
 
@@ -83,11 +85,11 @@ function botChoice(playerLetter) {
 //here we are returning the innerText of a box element with the provided id
 function getInnerTextById(id) {
   let domElement = document.getElementById(id);
-  console.log(`this is the id that is inside getinnertext: ${id}`);
+  // console.log(`this is the id that is inside getinnertext: ${id}`);
   let innerTextOfElement = domElement.innerText;
-  console.log(
-    `this is the innerText that is inside getinnertext: ${innerTextOfElement}`
-  );
+  // console.log(
+  //   `this is the innerText that is inside getinnertext: ${innerTextOfElement}`
+  // );
   // console.log(innerTextOfElement);
   return innerTextOfElement;
   //what is the innerText of element
@@ -97,8 +99,6 @@ document.querySelector(".restart").addEventListener("click", restart);
 
 function restart() {
   myArrOfIBoxIds.map((id) => (document.getElementById(id).innerText = ""));
-
-  console.log(emptyBoxes);
 
   //here i am mapping though the innerTexts and spitting them out in an arry
 
