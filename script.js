@@ -10,54 +10,55 @@ for (let i = 0; i < boxSections.length; i++) {
   myArrOfIBoxIds.push(boxSections[i].id);
   //we are pushing all the box ids into the empty array
 } // here we are adding an event listener to identify a click on a box
+function startGame() {
+  let didWin = false;
 
-// this loop will identify which box was selected by grabbing my array which now holds box numbers
-let didWin = false;
-//whwen we are trying to decalre a boolean or state a different boolean value when want to start with a false point to then make it true
-for (let i = 0; i < myArrOfIBoxIds.length; i++) {
-  // console.log(i);
-  //each
-  document
-    .getElementById(myArrOfIBoxIds[i])
-    .addEventListener("click", function () {
-      if (didWin) {
-        return;
-      }
-      console.log("inside event listener, value of didWin: ", didWin);
-      const playerTeamXorO = playerChoice(myArrOfIBoxIds[i]);
+  //whwen we are trying to decalre a boolean or state a different boolean value when want to start with a false point to then make it true
+  for (let i = 0; i < myArrOfIBoxIds.length; i++) {
+    // console.log(i);
+    //each
+    document
+      .getElementById(myArrOfIBoxIds[i])
+      .addEventListener("click", function () {
+        if (didWin) {
+          return;
+        }
+        console.log("inside event listener, value of didWin: ", didWin);
+        const playerTeamXorO = playerChoice(myArrOfIBoxIds[i]);
 
-      console.log(
-        `This is right outside the if else statement player team x or o value: ${playerTeamXorO}`
-      );
+        console.log(
+          `This is right outside the if else statement player team x or o value: ${playerTeamXorO}`
+        );
 
-      //this is reassigning a boolean based on player value
-      didWin = checkWin(playerTeamXorO);
+        //this is reassigning a boolean based on player value
+        didWin = checkWin(playerTeamXorO);
 
-      if (didWin) {
-        console.log(`this is playerScore ${playerScore++}`);
-        return;
-      }
+        if (didWin) {
+          console.log(`this is playerScore ${playerScore++}`);
+          return;
+        }
 
-      // botPlacement(botChoice(playerTeamXorO));
+        // botPlacement(botChoice(playerTeamXorO));
 
-      //this is returning a boolean based on bot value which is dependant on plare choice
-      didWin = checkWin(botPlacement(botChoice(playerTeamXorO)));
+        //this is returning a boolean based on bot value which is dependant on plare choice
+        didWin = checkWin(botPlacement(botChoice(playerTeamXorO)));
 
-      if (didWin) {
-        console.log(`this is possibly the bot point ${botScore++}`);
-        return;
-      }
+        if (didWin) {
+          console.log(`this is possibly the bot point ${botScore++}`);
+          return;
+        }
 
-      // console.log(`this is inside the event listener function ${didWin}`);
-    });
+        // console.log(`this is inside the event listener function ${didWin}`);
+      });
+  }
+  document.getElementsByClassName("botScore").innerText = botScore;
+
+  document.getElementsByClassName("playerScore").innerText = playerScore;
+  //with each if condition , one checking for player win and the other for bot win with the boolean value coming didWin, when the if statement runs we are going to stop the event listener somehow , maybe with a return maybe with a break
+  //main things i have to handle are the botchoice win and player
+  //
 }
-document.getElementsByClassName("botScore").innerText = botScore;
-
-document.getElementsByClassName("playerScore").innerText = playerScore;
-//with each if condition , one checking for player win and the other for bot win with the boolean value coming didWin, when the if statement runs we are going to stop the event listener somehow , maybe with a return maybe with a break
-//main things i have to handle are the botchoice win and player
-//
-
+startGame();
 //called on boxSelect only because it is waiting on an even listener to do anything
 
 function playerChoice(id) {
@@ -87,15 +88,23 @@ function getInnerTextById(id) {
   console.log(
     `this is the innerText that is inside getinnertext: ${innerTextOfElement}`
   );
-  document.querySelector(".restart").addEventListener("click", restart);
-
-  function restart() {
-    domElement.innerText = "";
-    console.log(`restart has been triggered`);
-    didWin = true;
-  }
-
+  // console.log(innerTextOfElement);
   return innerTextOfElement;
+  //what is the innerText of element
+}
+
+document.querySelector(".restart").addEventListener("click", restart);
+
+function restart() {
+  myArrOfIBoxIds.map((id) => (document.getElementById(id).innerText = ""));
+
+  console.log(emptyBoxes);
+
+  //here i am mapping though the innerTexts and spitting them out in an arry
+
+  console.log(`restart has been triggered`);
+  startGame();
+  // run();
 }
 
 function botPlacement(botLetter) {
