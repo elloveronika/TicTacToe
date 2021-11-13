@@ -1,7 +1,7 @@
 * {
   box-sizing: border-box;
-  font-size: larger;
-  font-family: Arial, Helvetica, sans-serif;
+
+  font-family: Helvetica, sans-serif;
   background-color: aliceblue;
 }
 .table {
@@ -9,13 +9,14 @@
   flex-direction: row;
   align-items: center;
   flex-wrap: wrap;
+  height: 50%;
 }
 
 section {
   display: flex;
   width: 33%;
   height: 300px;
-  outline: cadetblue solid 0.5rem;
+  border: cadetblue solid 0.5rem;
   justify-content: center;
   align-items: center;
 }
@@ -26,4 +27,41 @@ section {
 .score {
   display: flex;
   justify-content: space-around;
+}
+#box0,
+#box1,
+#box2 {
+  border-top: none;
+  font-size: 100px;
+}
+#box6,
+#box7,
+#box8 {
+  border-bottom: none;
+  font-size: 100px;
+}
+#box0,
+#box3,
+#box6 {
+  border-left: none;
+  font-size: 100px;
+}
+#box2,
+#box5,
+#box8 {
+  border-right: none;
+  font-size: 100px;
+}
+#box4 {
+  font-size: 100px;
+}
+.score {
+  font-size: 20px;
+}
+button {
+  font-size: 40px;
+  background-color: cadetblue;
+  border-radius: 33%;
+  border: turquoise;
+  color: whitesmoke;
 }

@@ -35,7 +35,6 @@ function startGame() {
 
         if (didWin) {
           // console.log(`this is playerScore ${playerScore++}`);
-
           document.querySelector(".playerScore").innerText = playerScore++;
           return;
         }
@@ -95,7 +94,7 @@ function getInnerTextById(id) {
   //what is the innerText of element
 }
 
-document.querySelector(".restart").addEventListener("click", restart);
+document.querySelector("button").addEventListener("click", restart);
 
 function restart() {
   myArrOfIBoxIds.map((id) => (document.getElementById(id).innerText = ""));
