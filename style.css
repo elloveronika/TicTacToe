@@ -16,7 +16,7 @@ section {
   display: flex;
   width: 33%;
   height: 300px;
-  border: cadetblue solid 0.5rem;
+  border: rgb(40, 105, 184) solid 0.5rem;
   justify-content: center;
   align-items: center;
 }
@@ -60,7 +60,7 @@ section {
 }
 button {
   font-size: 40px;
-  background-color: cadetblue;
+  background-color: rgb(40, 105, 184);
   border-radius: 33%;
   border: turquoise;
   color: whitesmoke;
