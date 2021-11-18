@@ -1,27 +1,41 @@
-* {
+*,
+*::after,
+*::before {
   box-sizing: border-box;
-
-  font-family: Helvetica, sans-serif;
-  background-color: aliceblue;
+}
+:root {
+  --cell-size: 100%;
+  --mark-size: cal(var(--cell-size) * 0.9);
+}
+body {
+  margin: 0;
+  justify-content: center;
+  display: grid;
 }
 .table {
-  display: flex;
-  flex-direction: row;
+  width: 70vh;
+  height: 70vh;
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  justify-items: center;
   align-items: center;
-  flex-wrap: wrap;
-  height: 50%;
+  grid-template: repeat(3, 1fr) / repeat(3, 1fr);
+  margin: auto;
 }
 
-section {
-  display: flex;
-  width: 33%;
-  height: 300px;
-  border: rgb(40, 105, 184) solid 0.5rem;
-  justify-content: center;
-  align-items: center;
+.box {
+  width: var(--cell-size);
+  height: var(--cell-size);
+  background-color: darksalmon;
+  border: rgb(238, 246, 250) solid 0.5rem;
 }
+
+/* section {
+  /* justify-content: center;
+  align-items: center; 
+} */
 .select {
-  display: flex;
   justify-content: center;
 }
 .score {
@@ -32,36 +46,30 @@ section {
 #box1,
 #box2 {
   border-top: none;
-  font-size: 100px;
 }
 #box6,
 #box7,
 #box8 {
   border-bottom: none;
-  font-size: 100px;
 }
 #box0,
 #box3,
 #box6 {
   border-left: none;
-  font-size: 100px;
 }
 #box2,
 #box5,
 #box8 {
   border-right: none;
-  font-size: 100px;
 }
-#box4 {
-  font-size: 100px;
-}
+
 .score {
   font-size: 20px;
 }
-button {
+/* button {
   font-size: 40px;
   background-color: rgb(40, 105, 184);
   border-radius: 33%;
   border: turquoise;
   color: whitesmoke;
-}
+} */
